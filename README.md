@@ -1,9 +1,10 @@
-# ⚖️ Transcrição de Audiências
 <p align="center">
-  <img src="assets/screenshot.png" width="900">
+  <img src="assets/Captura%20de%20tela%202026-08-04%20150636.png" width="900">
 </p>
 
-# 🎙️ Transcrição de Audiências
+---
+
+# ⚖️ Transcrição de Audiências
 Aplicação web desenvolvida em **Python** com **Streamlit** para automatizar a transcrição de vídeos de audiências utilizando a API da **AssemblyAI**.
 
 A aplicação permite que usuários enviem um vídeo diretamente pelo navegador, realizando automaticamente a extração do áudio, a transcrição com diarização (identificação dos falantes) e a geração de arquivos para download.
