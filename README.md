@@ -1,115 +1,140 @@
-# AI-Based Court Hearing Transcription with Speaker Diarization
+# ⚖️ Transcrição de Audiências
+<p align="center">
+  <img src="assets/screenshot.png" width="900">
+</p>
 
-This project implements an end-to-end pipeline for **automatic transcription of court hearing videos**, including **audio extraction, speech-to-text transcription, speaker diarization, and timestamps**.
+# 🎙️ Transcrição de Audiências
+Aplicação web desenvolvida em **Python** com **Streamlit** para automatizar a transcrição de vídeos de audiências utilizando a API da **AssemblyAI**.
 
-It is designed to support **legal professionals**, researchers, and developers who need to analyze long hearing recordings and convert them into structured textual documents.
-This project implements an end-to-end pipeline for automatic transcription of court hearing videos, including audio extraction, speech-to-text transcription, speaker diarization, and timestamps.
+A aplicação permite que usuários enviem um vídeo diretamente pelo navegador, realizando automaticamente a extração do áudio, a transcrição com diarização (identificação dos falantes) e a geração de arquivos para download.
 
-## Features
+## Funcionalidades
 
-- Accepts **single video files or folders** with multiple `.mp4` files
-- Automatic **audio extraction and normalization** (FFmpeg)
-- **Speech-to-text transcription** using AssemblyAI
-- **Speaker diarization** (who spoke and when)
-- **Timestamps per utterance**
-- Outputs:
-  - Literal transcription (`.txt`)
-  - Diarized transcription with timestamps (`.txt`)
-  - Raw API response (`.json`) for auditing or further processing
-- Ready to scale from notebooks to web applications
+- Upload de vídeos (`.mp4`, `.mov`, `.mkv` e `.avi`)
+- Extração automática do áudio utilizando FFmpeg
+- Transcrição automática via AssemblyAI
+- Diarização (identificação dos diferentes falantes)
+- Inclusão de timestamps em cada fala
+- Download da transcrição em `.txt`
+- Download do áudio extraído em `.mp3`
+- Download da resposta completa da API em `.json`
 
-## Technologies Used
+## Interface
 
-- **Python**
-- **FFmpeg** – audio extraction and preprocessing
-- **AssemblyAI API** – transcription + diarization + timestamps
-- **Kaggle** – experimentation and prototyping environment
+A aplicação foi desenvolvida utilizando Streamlit, permitindo que qualquer usuário realize a transcrição sem necessidade de executar scripts manualmente.
 
-## Pipeline Overview
+Fluxo da aplicação:
 
-Video (.mp4)
-
-↓
-
-Audio Extraction & Normalization (FFmpeg)
-
-↓
-
-AssemblyAI Transcription API
-
-├── Speech-to-text
-
-├── Speaker diarization
-
-└── Timestamps
-
-↓
-
-Structured Outputs (.txt / .json)
-
-## Output Format
-
-### Diarized Transcription (`*_assemblyai_diarized.txt`)
-
-Example:
-
-```
-[00:05:12 - 00:05:27] SPEAKER_0: Good afternoon, I declare the hearing open.
-[00:05:28 - 00:05:35] SPEAKER_1: Your Honor, speaking for the plaintiff.
+```text
+Upload do vídeo
+        │
+        ▼
+Extração do áudio (FFmpeg)
+        │
+        ▼
+Envio para AssemblyAI
+        │
+        ▼
+Transcrição + Diarização
+        │
+        ▼
+Formatação do resultado
+        │
+        ▼
+Download dos arquivos
 ```
 
-Each block contains:
-- Start and end timestamps
-- Speaker label (automatically assigned)
-- Transcribed text
+## Tecnologias utilizadas
 
-## Important Notes
+- Python 3
+- Streamlit
+- FFmpeg
+- Requests
+- AssemblyAI API
 
-- Speaker labels are **generic** (e.g., `SPEAKER_0`, `SPEAKER_1`)
-- Mapping speakers to legal roles (Judge, Plaintiff’s Lawyer, Defendant, etc.)
-  is a **planned future enhancement**
-- Human review is recommended for legal or official use
+## Estrutura do projeto
 
-## API Key Configuration
-
-This project uses the **AssemblyAI API**.
-
-For security reasons, the API key is **not stored in the code**.
-
-### Kaggle Setup
-1. Go to **Add-ons → Secrets**
-2. Create a secret:
-   - **Key:** `ASSEMBLYAI_API_KEY`
-   - **Value:** your AssemblyAI API key
-3. Restart the notebook session
-
-## How to Run
-
-1. Set the input path:
-```python
-INPUT_PATH = Path("/kaggle/input/your-video-or-folder")
+```text
+.
+├── app.py                 # Interface Streamlit
+├── audio.py               # Extração do áudio
+├── transcription.py       # Comunicação com a API da AssemblyAI
+├── formatter.py           # Formatação da transcrição
+├── assets/                # Logos e imagens
+├── requirements.txt
+├── packages.txt
+└── .streamlit/
 ```
-2. Run the notebook cells in order
-3. Generated files will be saved to: /kaggle/working/transcricoes/
 
-## Future Improvements (Planned)
+## Como executar localmente
 
-- Legal role mapping (e.g., `SPEAKER_0 → Judge`)
-- Export formats for legal workflows (`.docx`, `.pdf`)
-- Streamlit web application (upload → transcribe → download)
-- Batch processing with role templates
-- Automatic summarization of hearings
-- Redaction of sensitive information
+Clone o repositório:
 
-## Use Cases
+```bash
+git clone https://github.com/SEU-USUARIO/NOME-DO-REPOSITORIO.git
+```
 
-- Court hearing analysis
-- Legal document preparation
-- Academic research on judicial proceedings
-- AI-assisted legal workflows
-- Audio/video archiving and indexing
+Entre na pasta:
 
-# Author
-Developed by Ana Dognini
+```bash
+cd NOME-DO-REPOSITORIO
+```
 
-Focus: AI, Data Science, and applied machine learning in real-world contexts
+Crie um ambiente virtual:
+
+```bash
+python -m venv .venv
+```
+
+Ative o ambiente:
+
+Windows
+
+```bash
+.venv\Scripts\activate
+```
+
+Linux/macOS
+
+```bash
+source .venv/bin/activate
+```
+
+Instale as dependências:
+
+```bash
+pip install -r requirements.txt
+```
+
+Crie o arquivo:
+
+```text
+.streamlit/secrets.toml
+```
+
+Adicione sua chave da AssemblyAI:
+
+```toml
+ASSEMBLYAI_API_KEY="SUA_CHAVE"
+```
+
+Execute a aplicação:
+
+```bash
+streamlit run app.py
+```
+
+## Observações
+
+A chave da AssemblyAI **não é armazenada no repositório**.
+
+Ela deve ser configurada através de:
+
+- `.streamlit/secrets.toml` durante o desenvolvimento local;
+- **Secrets** do Streamlit Community Cloud durante o deploy.
+
+---
+
+## Licença
+
+Este projeto foi desenvolvido para fins educacionais e de automação de fluxos de transcrição de audiências.
