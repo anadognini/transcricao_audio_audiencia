@@ -16,7 +16,7 @@ from transcription import (
 
 st.set_page_config(
     page_title="Transcrição de Audiências",
-    page_icon="🎙️",
+    page_icon="/workspaces/transcricao_audio_audiencia/assets/logo3.png",
     layout="centered",
 )
 
