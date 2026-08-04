@@ -125,6 +125,18 @@ Execute a aplicação:
 streamlit run app.py
 ```
 
+## Aprendizados
+
+Durante o desenvolvimento deste projeto foram explorados conceitos como:
+
+- Integração com APIs REST
+- Upload e processamento de arquivos
+- Manipulação de áudio utilizando FFmpeg
+- Gerenciamento de segredos com Streamlit Secrets
+- Deploy automático utilizando GitHub + Streamlit Community Cloud
+- Organização de projetos Python em módulos
+- Desenvolvimento de interfaces web com Streamlit
+
 ## Observações
 
 A chave da AssemblyAI **não é armazenada no repositório**.
