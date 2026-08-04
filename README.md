@@ -134,8 +134,6 @@ Ela deve ser configurada através de:
 - `.streamlit/secrets.toml` durante o desenvolvimento local;
 - **Secrets** do Streamlit Community Cloud durante o deploy.
 
----
-
 ## Licença
 
-Este projeto foi desenvolvido para fins educacionais e de automação de fluxos de transcrição de audiências.
+Este projeto foi desenvolvido para fins educacionais e de automação de fluxos de transcrição de audiências para uso particular.
